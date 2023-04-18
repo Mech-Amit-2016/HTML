@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<script>
+
+        let qno=0;
+        let i=0;
+        let total=0;
+        let wrong=0;
+        let correct=0;
+        let x=[];
+
+    function getByQno(){
+
+      
+      document.getElementById("a").innerHTML="next";
+        qno++;
+        document.getElementById("hqno").innerHTML=qno+")";
+        document.getElementById("c").style.display=document.getElementById("b").style.display=document.getElementById("a").style.display;
+         document.getElementById("c").style.backgroundColor=document.getElementById("b").style.backgroundColor=document.getElementById("a").style.backgroundColor;
+        let url="http://localhost:999/getbyno?questionNo="+qno;
+    let p=fetch(url);
+p.then((response)=>{
+      // console.log(response.status);
+      // console.log(response.ok);
+      return response.json();
+}).then((value2)=>{
+    // console.log("value 2 ="+value2);
+    // console.log(value2[0].question);
+    // console.log("Value 2");
+    
+// console.log(value2.question);
+document.getElementById("hqus").innerHTML=value2[0].question;
+
+return value2;
+}) 
+
+    }
+    
+    function trueBtn(){
+      
+        if(document.getElementById("b").style.backgroundColor!="green"){
+      document.getElementById("c").style.backgroundColor=document.getElementById("b").style.backgroundColor;
+document.getElementById("b").style.backgroundColor="green";}
+else{
+  document.getElementById("b").style.backgroundColor=document.getElementById("a").style.backgroundColor
+}
+    }
+
+   function falseBtn(){
+    
+    if(document.getElementById("c").style.backgroundColor!="red"){
+    document.getElementById("b").style.backgroundColor=document.getElementById("c").style.backgroundColor;
+    document.getElementById("c").style.backgroundColor="red";}
+   
+   else{
+    document.getElementById("c").style.backgroundColor=document.getElementById("a").style.backgroundColor
+   }
+  }
+     
+    //  let x1=true;
+    //  let x2=true;
+function getAll(){
+  let url="http://localhost:999/allquestion";
+  let p=fetch(url);
+  p.then((response)=>{
+      // console.log(response.status);
+      // console.log(response.ok);
+      return response.json();
+}).then((value2)=>{
+    // console.log("value 2 ="+value2);
+      x=value2;
+      console.log(Boolean([0].ans))
+      // console.log(x[2].ans)
+      // console.log(x[3].ans)
+      // console.log(x[4].ans)
+      // console.log(x[5].ans)
+      console.log(x[0].ans=="false")
+      // console.log(x[0].question)
+    
+       })}
+
+   getAll();
+
+ 
+
+   function result(){
+    if(i>0 ){
+    if(document.getElementById("b").style.backgroundColor=="green"){
+      console.log(x[i].ans===true);
+      // console.log(x[i].ans)
+       if(x[i].ans===true){
+        total++;
+        correct++;
+                }
+        else{
+        total--;
+        wrong++;
+        }
+       
+    }
+    if(document.getElementById("c").style.backgroundColor=="red"){
+      console.log(x[i].ans===false)
+      // console.log(x[i].ans)
+      if(x[i].ans===false){
+       total++;
+      correct++;}
+       else{
+       total--;
+      wrong++}
+    }
+  }
+    console.log(i);
+    console.log("correct="+correct);
+    console.log("wrong="+wrong);
+    console.log("i="+i);
+    console.log("total="+total)
+    console.log("in_progress");
+    i++;
+     
+    if(i<=30){
+    getByQno();
+    }
+   
+
+     if(i>30){
+      document.getElementById("all").style.display=document.getElementById("quiz").style.display;
+   document.getElementById("quiz").style.display="none";
+   document.getElementById("wrong").innerHTML="wrong="+wrong;
+   document.getElementById("correct").innerHTML="correct="+correct;
+   document.getElementById("total").innerHTML="total score="+total;
+   document.getElementById("quiz").style.dispaly="none"
+   console.log("final");
+     }
+  }
+
+  
+</script>  
+</head>
+  <body>
+    <div id="quiz">
+    <h1 id="hqno"></h1>
+    <h1 id="hqus"></h1>
+    <div class="d-grid gap-2">
+        <button  id="a" onclick="result()" class="btn btn-primary" type="button">start</button>
+        <button  id="b" onclick="trueBtn()" class="btn btn-primary" type="button" name="t" style="display: none;" value="1">true</button>
+        <button  id="c" onclick="falseBtn()" class="btn btn-primary" type="button" name="f" style="display: none;" value="0">false</button>
+
+      </div>
+     </div>
+      <div id="all" style="display: none;">
+        <h1 id="wrong"></h1>
+        <h1 id="correct"></h1>
+        <h1 id="total"></h1>
+               </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+<html>  
+<head>  
+<title> Javascript Fetch API </title>  
+</head>  
+<body>  
+<p> Javascript Fetch API  </p>  
+<script>  
+//get the URL of the data  
+let fetch_Res = fetch("http://localhost:999/allquestion");  
+ 
+//Fetch API method for getting requests  
+// fetch variable is the promise to resolve response using.then() method  
+fetch_Res  
+.then(response => response.json())  // convert to json data  
+.then(data => console.log(data))   // display data as an output  
+</script>  
+</body>  
+</body>  
+</html>  

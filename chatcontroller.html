@@ -1,0 +1,22 @@
+<html>
+    <head></head>
+    <body>
+        <script>
+            let url="http://localhost:999/addchat?sender="+a+"&receiver="+b+"&message="+c;
+            // let headers ={}
+            let p=fetch(url,{
+                method : "Post",
+                mode: 'cors',
+                // headers: headers
+            });
+            p.then((response)=>{
+      console.log(response.status)
+    //   console.log(value1.ok)
+      return response.json()
+}).then((value2)=>{
+console.log(value2)
+})
+            
+        </script>
+    </body>
+</html>
