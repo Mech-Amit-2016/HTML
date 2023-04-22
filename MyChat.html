@@ -14,7 +14,7 @@
     console.log(b)
     console.log(c)
 
-    let url="http://192.168.1.4:999/addchat?sender="+a+"&receiver="+b+"&message="+c;
+    let url="http://192.168.43.232:999/addchat?sender="+a+"&receiver="+b+"&message="+c;
     let p=fetch(url,{
       method : "Post",
                 mode: 'cors',
@@ -23,6 +23,7 @@
       return response.json();
 }).then((value2)=>{
   console.log(value2);
+  
   document.getElementById("C").value=" ";
   console.log(document.getElementById("C").value);
 
@@ -38,7 +39,7 @@ return value2;
     let b=document.getElementById("B").value;
      let headers={}
      //http://192.168.1.4:5500
-    let url="http://192.168.1.4:999/getchat?user1="+a+"&user2="+b;
+    let url="http://192.168.43.232:999/getchat?user1="+a+"&user2="+b;
     let p=fetch(url,{
       method : "Get",
                 mode: 'cors',
@@ -77,7 +78,7 @@ return value2;
         <input type="text" class="form-control" placeholder="Sender" aria-label="username" aria-describedby="basic-addon1" id="A">
       </div>
       <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">@</span>
+        <span class="input-group-text" id="basic-addon1">@</span> 
         <input type="text" class="form-control" placeholder="receiver" aria-label="Username" aria-describedby="basic-addon1" id="B">
       </div>
       <div class="input-group mb-3">
