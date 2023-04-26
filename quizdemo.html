@@ -47,8 +47,8 @@
         document.getElementById("quiz").style.display =
           document.getElementById("quiz1").style.display;
 
-        document.getElementById("quiz2").style.display = "none";
-        document.getElementById("quiz1").style.display = "none";
+        document.getElementById("starter").style.display = "none";
+        document.getElementById("body").style.backgroundColor="seashell"
           // window.alert("click ok"+"arr.length"+arr.length);
         nextqus();
       }
@@ -109,53 +109,78 @@
       }
     </script>
   </head>
-  <body>
-    <div id="quiz" style="display: none">
+  <body id="body" style="background-color: darkgreen;">
+    <div id="quiz" style="display: none; " >
        
       <form>
-        <h1>QuizApp</h1>
-        <h1 id="index"></h1>
-        <p id="question">question here</p>
-          <input required type="radio" id="a" name="X" value="1" />  
-        <label for="a" id="A" value="1">HTML</label>  
-        <input required type="radio" id="b" name="X" value="2" /> 
-        <label for="b" id="B" value="2">CSS</label><br />
+        <div class="container text-center">
+          
+            <div class="row"> <div class="col-4"></div> <div class="col-4"><h1>QuizApp</h1></div><div class="col-4"></div></div>
+              <div class="row"><div class="col-4"></div> <div class="col-4"><h1 id="index"></h1></div><div class="col-4"></div></div>
+              <div class="row"> <div class="col-4"></div> <div class="col-4"><p id="question">question here</p></div><div class="col-4"></div></div>
+              <div class="row"> <div class="col-3"></div> <div class="col-3"> <input required type="radio" id="a" name="X" value="1" />  
+                <label for="a" id="A" value="1">HTML</label></div> <div class=col-3> 
+                <input required type="radio" id="b" name="X" value="2" /> 
+                <label for="b" id="B" value="2">CSS</label></div><div class="col-3"></div></div>
+                <div class="row"> <div class="col-3"></div> <div class="col-3"> <input required type="radio" id="c" name="X" value="3" />  
+                  <label for="c" id="C" value="3">JavaScript</label></div><div class="col-3">
+                  <input required type="radio" id="d" name="X" value="4" />
+                    <label for="d" id="D" value="4">JavaScript</label></div><div class="col-3"></div></div>
+                  <div class="row"> <div class="col-4"></div> <div class="col-4"><input required type="radio" style="display: none;" id="default" name="X" value="4" /></div><div class="col-4"></div></div>
+                  <div class="row"> <div class="col-4"></div> <div class="col-4"><button
+                    type="button"
+                    onclick="nextqus()"
+                    id="quiz"
+                    class="btn btn-primary"
+                  >
+                    next
+                  </button></div><div class="col-4"></div></div>
+                 
+        
+        <!--   <input required type="radio" id="a" name="X" value="1" />  
+        <label for="a" id="A" value="1">HTML</label>   -->
+        <!-- <input required type="radio" id="b" name="X" value="2" /> 
+        <label for="b" id="B" value="2">CSS</label><br /> -->
       
-          <input required type="radio" id="c" name="X" value="3" />  
+        <!--   <input required type="radio" id="c" name="X" value="3" />  
         <label for="c" id="C" value="3">JavaScript</label>
         <input required type="radio" id="d" name="X" value="4" />
-          <label for="d" id="D" value="4">JavaScript</label> <br />
-        <input required type="radio" style="display: none;" id="default" name="X" value="4" />
+          <label for="d" id="D" value="4">JavaScript</label> <br /> -->
+        <!-- <input required type="radio" style="display: none;" id="default" name="X" value="4" /> -->
         
-        <button
+        <!-- <button
           type="button"
           onclick="nextqus()"
           id="quiz"
           class="btn btn-primary"
         >
           next
-        </button>
-
+        </button> -->
+         </div>
          
       </form>
-    </div>
-    <button
-      id="quiz1"
-      type="button"
-      onclick="quiz1()"
-      class="btn btn-primary"
-    >
-      quiz1
-    </button>
-    <button
-      id="quiz2"
-      type="button"
-      onclick="quiz2()"
-      class="btn btn-primary"
-    >
-      quiz2
-    </button>
 
+    </div>
+   
+    <div class="container text-center" id="starter" style="background-color: hotpink;">
+      <figure class="text-center">
+        <blockquote class="blockquote">
+          <p>please select a quiz.</p>
+        </blockquote>
+        
+      </figure>
+      <div class="row"> <div class="col-4"></div> <div class="col-4"><button id="quiz1" type="button" onclick="quiz1()" class="btn btn-primary">quiz1</button></div><div class="col-4"></div></div><br/>
+      <div class="row"> <div class="col-4"></div> <div class="col-4"><button id="quiz2" type="button" onclick="quiz2()" class="btn btn-primary">quiz2</button></div><div class="col-4"></div></div>
+    </div>
+    <br/><br/><br/><br/><br/>    <br/><br/><br/><br/><br/>     <br/><br/><br/><br/><br/>     <br/><br/>
+
+
+
+    <footer class="footer mt-auto py-3 bg-body-tertiary">
+      <div class="container">
+        <span class="text-body-secondary">&copy; Developed by 'Amit maurya'</span>
+      </div>
+    </footer>  
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"

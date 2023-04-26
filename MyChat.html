@@ -14,7 +14,7 @@
     console.log(b)
     console.log(c)
 
-    let url="http://192.168.43.232:999/addchat?sender="+a+"&receiver="+b+"&message="+c;
+    let url="http://localhost:999/addchat?sender="+a+"&receiver="+b+"&message="+c;
     let p=fetch(url,{
       method : "Post",
                 mode: 'cors',
@@ -39,7 +39,7 @@ return value2;
     let b=document.getElementById("B").value;
      let headers={}
      //http://192.168.1.4:5500
-    let url="http://192.168.43.232:999/getchat?user1="+a+"&user2="+b;
+    let url="http://localhost:999/getchat?user1="+a+"&user2="+b;
     let p=fetch(url,{
       method : "Get",
                 mode: 'cors',
@@ -63,7 +63,7 @@ out+='</table>';
 document.getElementById("D").innerHTML=out;
 return value2;
    })
-  }
+  } 
 
   setInterval(() => {
     get();
