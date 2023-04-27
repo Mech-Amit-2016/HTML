@@ -3,12 +3,26 @@
         <script>
             let city="aranasi";
             let url="https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=cc9d46cca5982a731dda7dcdf577652a&units=metric#";
-        let p=fetch(url);
+          let a=0;
+            let p=fetch(url);
         p.then((response)=>{
-            
-           let res= response.json()
-          console.log(res.message)
+            if(!response.ok){
+                a=1
+                return response.json()
+            }
+        //    let res= response.json()
+        else
+        return response.json()
+        //   console.log(res.message)
         })
+        .then((data)=>{
+            if(a==1){
+                document.write(data.message)
+            }
+            else{
+                console.log(data)
+            }
+        }).catch((error)=>console.log(error))
         
         </script>
     </head>
