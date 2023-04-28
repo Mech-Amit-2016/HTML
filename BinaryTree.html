@@ -1,0 +1,44 @@
+<html>
+    <head>
+       <script>
+        let a=[];
+        function createNullNode(){
+            return ({ptr:null});
+        }
+
+        function getNode(data){
+            return ({data:data,left:createNullNode(),right:createNullNode()});
+        }
+
+        function addNode(root,data){
+            if(root.ptr==null){
+                var newNode=getNode(data);
+                root.ptr=newNode
+                console.log(root.ptr.data);
+                return;
+            }
+            if(root.ptr.data>=data){
+               
+                addNode(root.ptr.left,data);
+            }
+            else
+            addNode(root.ptr.right,data)
+        }
+
+        function createTree(){
+            var root=createNullNode()
+            for(var x in a){
+
+                if(!isNaN(a[x]) && a[x]!='')
+                addNode(root,x);
+            }
+            return root;
+        }
+
+       </script>
+    </head>
+    <body>
+<input type="number" style="width: 300px;" id="a">
+<button style="width: 300px;background-color: chartreuse;"  onclick="adddata()">click to add</button> 
+    </body>
+</html>

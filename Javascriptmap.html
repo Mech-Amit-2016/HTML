@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <style>
+            .topline{
+                display: flex;
+                flex-direction: row;
+                align-items: stretch;
+                justify-content: space-evenly;
+                border: 3px solid pink;
+                box-shadow: 10px 5px 5px rgba(34, 12, 92, .856);
+            }
+        </style>
+        <script>
+          
+        </script>
+    </head>
+    <body>
+      c<script>
+        const numbers=[1,2,3,4,5,6];
+        const squareNumbers=numbers.map(function(number){
+            return number*number;
+        })
+        document.writeln("square_numbers="+squareNumbers);
+
+        const numbers1=[1,2,3,4,5,6]
+        const evenNumbers=numbers1.map((number)=>{
+            if(number%2==0)
+            return number;
+        })
+        document.writeln("evevn_numbers="+evenNumbers)
+
+        const fruits=["apple","banana","orannge","grapes","guava"];
+        fruits.splice(0,3,"beans","potato");
+        console.log(fruits);
+      </script> 
+    </body>
+</html>
