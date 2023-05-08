@@ -32,6 +32,18 @@
         const fruits=["apple","banana","orannge","grapes","guava"];
         fruits.splice(0,3,"beans","potato");
         console.log(fruits);
+
+        const persons = [
+  {firstname : "Malcom", lastname: "Reynolds"},
+  {firstname : "Kaylee", lastname: "Frye"},
+  {firstname : "Jayne", lastname: "Cobb"}
+];
+function getFullName(item) {
+  return [item.firstname,item.lastname].join(" ");
+}
+persons.map(getFullName);
+console.log(persons)
+
       </script> 
     </body>
 </html>

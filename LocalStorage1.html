@@ -1,0 +1,78 @@
+<!-- https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=cc9d46cca5982a731dda7dcdf577652a&units=metric#" -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+   <script>
+    function fetchItem(){
+        let x;
+        let city=document.getElementById("d").value;
+     let url="https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=cc9d46cca5982a731dda7dcdf577652a&units=metric#";
+          let p=fetch(url)
+          p.then((response)=>{
+      
+            return response.json()
+          }) .then((data)=>{
+          
+            localStorage.setItem(city,JSON.stringify(data))
+            document.getElementById("a").value=data.main.temp
+            document.getElementById("b").value=data.main.temp_min;
+            document.getElementById("c").value=data.main.temp_max;}
+          ).catch((error)=>{
+            // console.log("********"+error+"*****************************")
+            console.log(error.json())
+            document.getElementById("d").value="city_not_found"
+          })
+    } 
+    
+    function getItem(){
+              let city=document.getElementById("d").value
+           let data= localStorage.getItem(city)
+        //    console.log("*****"+data)
+        if(data==null)
+        document.getElementById("d").value="city_not_found";
+        else{
+           let data1=JSON.parse(data)
+           document.getElementById("a").value=data1.main.temp
+            document.getElementById("b").value=data1.main.temp_min;
+            document.getElementById("c").value=data1.main.temp_max;
+        }
+    }
+   </script> 
+</head>
+  <body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4"><div class="form-floating mb-3">
+                <input type="text" class="form-control" id="d" placeholder="name@example.com">
+                <label for="floatingInput">enter city name</label>
+              </div>
+              <div class="col-4"></div>
+        </div>
+        
+        <div class="row">
+            <div class="col-4"><div class="form-floating mb-3">
+                <input type="text" class="form-control" id="a" placeholder="name@example.com">
+                <label for="floatingInput">temp</label>
+              </div></div>
+            <div class="col-4"><div class="form-floating mb-3">
+                <input type="text" class="form-control" id="b" placeholder="name@example.com">
+                <label for="floatingInput">min_Temp</label>
+              </div></div>
+            <div class="col-4"><div class="form-floating mb-3">
+                <input type="text" class="form-control" id="c" placeholder="name@example.com">
+                <label for="floatingInput">max_temp</label>
+              </div></div>
+              <br/>
+              </div>
+              <button type="button" onclick="fetchItem()" class="btn btn-primary">getData</button>
+              <button type="button" onclick="getItem()" class="btn btn-primary">fetchData</button>
+    
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  </body>
+</html>

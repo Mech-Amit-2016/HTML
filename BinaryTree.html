@@ -2,6 +2,12 @@
     <head>
        <script>
         let a=[];
+
+        function addData(){
+            let x=document.getElementById("a").value
+            a.unshift(x);
+            console.log(a)
+        }
         function createNullNode(){
             return ({ptr:null});
         }
@@ -32,13 +38,17 @@
                 if(!isNaN(a[x]) && a[x]!='')
                 addNode(root,x);
             }
+            // console.log(root)
+        
             return root;
         }
-
+           
        </script>
     </head>
     <body>
 <input type="number" style="width: 300px;" id="a">
-<button style="width: 300px;background-color: chartreuse;"  onclick="adddata()">click to add</button> 
-    </body>
+<button id="b" style="width: 300px;background-color: chartreuse;"  onclick="addData()">click to add</button> 
+   
+<button id="c" style="width: 300px;background-color: chartreuse;"  onclick="createTree()">create_Tree</button> 
+</body>
 </html>
