@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+  .image-container{
+    border: 2px solid red;
+    
+  }
+</style>
+<body>
+     <!-- HTML code -->
+<div class="image-container" contenteditable="true" onpaste="handlePaste(event)">
+    <p>Copy and paste an image here:</p>
+  </div>
+  
+  <script>
+    // JavaScript code
+    function handlePaste(event) {
+      // Access the clipboard items that were pasted
+      var items = event.clipboardData.items;
+      
+      // Iterate through each item
+      for (var i = 0; i < items.length; i++) {
+        // Check if the item is an image
+        if (items[i].type.indexOf("image") !== -1) {
+          // Retrieve the image data as a File object
+          var file = items[i].getAsFile();
+          
+          // Create a FileReader object to read the file
+          var reader = new FileReader();
+          
+          // Set the event listener for when the file has been read successfully
+          reader.onload = function(event) {
+            // Create a new img element
+            var img = document.createElement("img");
+            
+            // Set the src attribute to the result of reading the file (data URL)
+            img.src = event.target.result;
+            
+            // Append the img element to the .image-container element
+            document.querySelector(".image-container").appendChild(img);
+          };
+          
+          // Read the file as a data URL
+          reader.readAsDataURL(file);
+        }
+      }
+    }
+  </script>
+  
+
+</body>
+</html>

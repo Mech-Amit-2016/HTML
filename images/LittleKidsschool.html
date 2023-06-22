@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import {ReturnData} from './Policydata.js';
+         import {PrivacyData} from './Policydata.js'
+    //   let url="http://localhost:8080/littlekids"
+    //   fetch(url);
+
+      let url1="http://localhost:8080/littlekids/addrootdata?name=ReturnData";
+      fetch(url1,{
+        method:"post"
+      });
+      
+        
+    for(let i=0;i<ReturnData.length;i++){
+        let url=`http://localhost:8080/littlekids/addsubdata?title=${ReturnData[i].title}&name=ReturnData`;
+    console.log(url)
+        let p=fetch(url,{
+            method:"get"
+        });
+        p.then((response)=>{
+            if(response.status!=200)
+               i--;
+               console.log(response.status)
+            return response.json();
+        }).then((data)=>{
+            console.log(data)
+        })
+
+    }
+      
+    </script>
+</body>
+</html>

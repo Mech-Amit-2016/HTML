@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    td{
+       border: 2px solid green; 
+    }
+</style>
+<body>
+    <div id="c"></div>
+    <script>
+        let a=[];
+        let url="https://gist.githubusercontent.com/Mech-Amit-2016/9be9532f04a49c17a8a37ae00993f6b0/raw/175e772ed57d460318b938cf269e8d3bae084a81/TwoDarray.json";
+       let p=fetch(url);
+       p.then((response)=>{
+        return response.json();
+       }).then((data)=>{
+        console.log(data)
+       })
+        // let a=[[1,2,3,4],[1,2,3,4]];
+//         for(let i=0;i<a.length;i++){
+//            a[i]=a[i].map((b)=>{
+//                       return `<td>${b}</td>`
+//            })
+//         }
+//         for(let i=0;i<a.length;i++){
+//             a[i].join("");
+//         }
+//         a=a.map((b)=>{
+//             return `<tr>${b}</tr>`
+//         })
+//         let b=a.join("");
+//   document.getElementById("c").innerHTML=`<table>${b}</table>`
+    </script>
+    
+</body>
+</html>

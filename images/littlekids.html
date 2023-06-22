@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kids_school</title>
+</head>
+<body>
+    <script type="module">
+        import {ReturnData}  from './Policydata.js';
+         import {PrivacyData} from './Policydata.js'
+
+        //  import * as data from './Policydata.js'
+        // //  let a=[]
+        // //  a=data;
+        //  console.log(data)
+         console.log(ReturnData)
+        let url="http://localhost:999/littlekids/addpolicy?policyName=ReturnData";
+
+        let p=fetch(url);
+        p.then((response)=>{
+            console.log(response.status)
+            return response.json();
+        }).then((data)=>{
+           console.log(data)
+        
+          if(data!=null){
+         for(let i=0;i<ReturnData.length;i++){
+
+            let url_1=`http://localhost:999/littlekids/addsubpolicy?policyId=${data.id}&title=${ReturnData[i].title}`;
+            console.log(url_1);
+            let p1=fetch(url_1);
+            p1.then((response)=>{
+                if(response.status!=200){
+                    i--;
+                }
+                return response.json()
+            }).then((data1)=>{
+                console.log(data1);
+           
+            for(let j=0;j<ReturnData[i].Points.length;j++){
+                let url_2=`http://localhost:999/littlekids/addpoint?point=${ReturnData[i].Points[j].point}&subPolicyId=${data1.id}&policyId=${data.id}`;
+                let p=fetch(url_2);
+                p.then((response)=>{
+                    if(response.status!=200){
+                        j--;
+                    }
+                    console.log(response.status)
+                   return response.json()
+                }).then((data)=>{
+                    // console.log(data);
+                })
+            }
+        })
+        }
+    }
+     })
+
+        let url_="http://localhost:999/littlekids/addpolicy?policyName=PrivacyData";
+
+let p_=fetch(url_);
+p_.then((response)=>{
+    console.log(response.status)
+    return response.json();
+}).then((data_)=>{
+   console.log(data_)
+    if(data_!=null){
+ for(let i=0;i<PrivacyData.length;i++){
+
+    let url_1=`http://localhost:999/littlekids/addsubpolicy?policyId=${data_.id}&title=${PrivacyData[i].title}`;
+    let p1=fetch(url_1);
+    p1.then((response)=>{
+        if(response.status!=200){
+            i--;
+        }
+        return response.json()
+    }).then((data)=>{
+        // console.log(data);
+   
+    for(let j=0;j<PrivacyData[i].Points.length;j++){
+        let url_2=`http://localhost:999/littlekids/addpoint?point=${PrivacyData[i].Points[j].point}&subPolicyId=${data.id}&policyId=${data_.id}`;
+        let p=fetch(url_2);
+        p.then((response)=>{
+            if(response.status!=200){
+                j--;
+            }
+            console.log(response.status)
+           return response.json()
+        }).then((data)=>{
+            // console.log(data);
+        })
+    }
+})
+}
+    }
+})
+      
+    </script>
+</body>
+</html>

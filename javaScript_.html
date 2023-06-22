@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create_Quiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  </head>
+  <body>
+    <script>
+        let a=[]
+      function show_quizes(){
+        document.getElementById("menu_bar").style.display="none";
+        document.getElementById("quizmenu").style.display="block";
+         let url=`http://localhost:999/getall`;
+        
+         let p=fetch(url);
+         p.then((response)=>{
+          return response.json()
+         }).then((data)=>{
+          console.log(data);
+              a=data;
+              console.log(a);
+               if(a===null)
+               document.getElementById("quizmenu").innerHTML=`<h2>no active quizes found</h2>`
+               else{
+                let v=[];
+                for(let i=0;i<a.length;i++){
+                  v.push(`<button type="button" onClick="start_quiz(event)" value=${i} class="btn btn-primary btn-lg">Quiz_${i+1}</button>`)
+                }
+                v.join("");
+                console.log(v)
+                document.getElementById("quizmenu").innerHTML=v;
+               }
+            })}
+             let v1;
+             let question1=[]
+
+            function start_quiz(event){
+              document.getElementById("quizmenu").style.display="none";
+              document.getElementById("q_slide").style.display="block";
+              // let question1=[]
+              // console.log(event);
+              // console.log(a[i]);
+              v1=event.target.value;
+              // console.log(v1);
+              console.log(`length=${a.length}`)
+              // console.log(`a=${a[0]}`); 
+              // console.log(a[v1]);
+             question1=a[v1].questionList;
+             document.getElementById("i").innerHTML=question1[0].question;
+            document.getElementById("M").innerHTML=question1[0].optA;
+            document.getElementById("N").innerHTML=question1[0].optB;
+            document.getElementById("O").innerHTML=question1[0].optC;
+            document.getElementById("P").innerHTML=question1[0].optD;
+            document.getElementById("default").checked=true;
+          //  next(question1);
+
+            }
+            let total=0,index=0;
+            function total_res(){
+              // console.log(`a.length=${a.length}`)
+              let ans=document.getElementsByName("X")
+              console.log(`a=${ans[0].checked}`)
+              console.log(`b=${ans[1].checked}`)
+              console.log(`a=${ans[2].checked}`)
+              console.log(`a=${ans[3].checked}`)
+
+              for(let i=0;i<=3;i++){
+                  if(ans[i].checked){                   
+                    if(question1[index].correctOption === i+1){
+                    total++;
+                    index++;
+                  }
+                    else{
+                    total--;
+                    index++;}
+                    console.log(`total=${total}`)
+                 console.log(`index=${index}`)
+                    return;
+                  }
+                 }
+                 console.log(`total=${total}`)
+                 console.log(`index=${index}`)
+                 index++;
+            }
+
+            function next(){
+              
+                 
+              total_res();
+              if(index>a.length)
+              {
+                   document.getElementById("q_slide").style.display="none";
+                   document.getElementById("submit_quiz").style.display="block";
+              }             
+                if(index<=a.length){
+                document.getElementById("default").checked=true;
+              document.getElementById("i").innerHTML=question1[index].question;
+            document.getElementById("M").innerHTML=question1[index].optA;
+            document.getElementById("N").innerHTML=question1[index].optB;
+            document.getElementById("O").innerHTML=question1[index].optC;
+            document.getElementById("P").innerHTML=question1[index].optD;
+             
+                   }
+                }
+            
+
+            function submit_quiz(){
+              let url=`http://localhost:999/addresult?totalMarks=${total}&quiz_id=${a[v1].id}`;
+
+              let p=fetch(url);
+              p.then((response)=>{
+                return response.json()
+              }).then((data)=>{
+                console.log(data)
+                document.getElementById("finish").style.display="none";
+                document.getElementById("note").innerHTML=`<p>your response id is ${data.id}.you can see your response after ${data.endTime}</p>`
+              })
+            }
+
+      let quiz_id;
+      function addQuestion(){
+             let a=document.getElementById("qus1").value;
+             console.log(a);
+             let b=document.getElementById("oA").value;
+             let c=document.getElementById("oB").value;
+             let d=document.getElementById("oC").value;
+             let e=document.getElementById("oD").value;
+             let f=document.getElementById("cO").value;
+
+             let url=`http://localhost:999/addquestion?quiz_id=${quiz_id}&question=${a}&optA=${b}&optB=${c}&optC=${d}&optD=${e}&correctOption=${f}`
+             let p=fetch(url);
+             p.then((response)=>{
+              return response.json()
+             }).then((data)=>{
+              console.log(data)
+             })
+
+      }
+
+      function submit(){
+        document.getElementById("qus").style.display="none"
+        document.getElementById("complete").style.display="block";
+        document.getElementById("message").innerHTML=`<p>quiz created successfully press the button to go to the main menu </p>`
+      }
+
+      function menu_bar1(){
+        document.getElementById("complete").style.display="none"
+        document.getElementById("menu_bar").style.display="block"
+      }
+
+        function create_quiz(){
+          document.getElementById("menu_bar").style.display="none";
+          document.getElementById("reg").style.display="block";
+        }
+
+        function submitdetails(){
+          
+            let a=document.getElementById("a").value;
+            let b=document.getElementById("b").value;
+            let c=document.getElementById("c").value;
+            let d=document.getElementById("d").value;
+            let e=document.getElementById("e").value;
+            let f=document.getElementById("f").value;
+
+            let A=document.getElementById("A").value;
+            let B=document.getElementById("B").value;
+            let C=document.getElementById("C").value;
+            let D=document.getElementById("D").value;
+            let E=document.getElementById("E").value;
+            console.log(`E=${E}`)
+            let F=document.getElementById("F").value;
+              document.getElementById("reg").style.display="none"
+              document.getElementById("qus").style.display="block"
+            let url=`http://localhost:999/newquiz?sDay=${a}&sMonth=${b}&sYear=${c}&sHr=${d}&sMin=${e}&sSec=${f}&eDay=${A}&eMonth=${B}&eYear=${C}&eHr=${D}&eMin=${E}&eSec=${F}`
+             let p=fetch(url);
+             p.then((response)=>{
+                return response.json();
+             }).then((data)=>{
+                console.log(data);
+                quiz_id=data.id;
+             })
+         
+             document.getElementById("reg").style.display=`none`;
+              
+        }
+    </script>
+    <div class="container-fluid">
+
+      <div id="quizmenu" style="display: none;">
+
+      </div>
+       <!-- ******************************************************************** -->
+
+         <div id="q_slide" style="display: none;">
+         
+              <div class="row"><div class="col-12"><P id="i"></P></div></div>
+              <div class="row">
+                <div class="col-6"><input required type="radio" id="m" name="X" value="1" />  <label for="m" id="M" value="1">HTML</label></div> 
+                <div class="col-6"><input required type="radio" id="n" name="X" value="2" />  <label for="n" id="N" value="2">HTML</label></div> 
+              </div>
+              <div class="row">
+                <div class="col-6"><input required type="radio" id="o" name="X" value="3" />  <label for="o" id="O" value="3">HTML</label></div> 
+                <div class="col-6"><input required type="radio" id="p" name="X" value="4" />  <label for="p" id="P" value="4">HTML</label></div> 
+              </div>
+             <div class="row"><div class="col-12"><input required type="radio" style="display: none;" id="default" name="X" value="4" /></div></div>
+             <button type="button" onClick="next()" class="btn btn-primary btn-lg">next</button>
+
+         </div>  
+              <!-- ************************************************************************ -->
+              <div id="submit_quiz" style="display: none;">
+                <button type="button" onClick="submit_quiz()" class="btn btn-primary btn-lg" id="finish">submit</button>
+                <div id="note"></div>
+              </div>
+       <!-- ************************************************************************* -->
+       <div id="menu_bar">
+        <button type="button" onClick="create_quiz()" class="btn btn-primary btn-lg" >create_quiz</button>
+        <button type="button" onClick="show_quizes()" class="btn btn-primary btn-lg" >take_quiz</button>
+        <button type="button" onClick="" class="btn btn-primary btn-lg" >view_quiz_result</button>
+
+       </div>
+       <!-- **************************************************************************** -->
+        <div id="reg" style="display: none;">
+            <h2>Start Date Description</h2>
+            <div class="row">
+                <div class="col-2"><div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="a" placeholder="startDay">
+                    <label for="a">startDay</label>
+                  </div></div>
+                  <div class="col-2"><div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="b" placeholder="startMonth">
+                    <label for="b">startMonth</label>
+                  </div></div>
+                  <div class="col-2"><div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="c" placeholder="startYear">
+                    <label for="c">startYear</label>
+                  </div></div>
+                  <div class="col-2"><div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="d" placeholder="startHr">
+                    <label for="d">startHr</label>
+                  </div></div>
+                  <div class="col-2"><div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="e" placeholder="startMin">
+                    <label for="e">startMin</label>
+                  </div></div>
+                  <div class="col-2"><div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="f" placeholder="startSec">
+                    <label for="f">startSec</label>
+                  </div></div>
+            </div>
+            <h2>End date description</h2>
+            <div class="row">
+                <div class="col-2"><div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="A" placeholder="endDay">
+                    <label for="A ">endDay</label>
+                  </div></div>
+                  <div class="col-2"><div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="B" placeholder="endMonth">
+                    <label for="B">endMonth</label>
+                  </div></div>
+                  <div class="col-2"><div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="C" placeholder="endYear">
+                    <label for="C">endYear</label>
+                  </div></div>
+                  <div class="col-2"><div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="D" placeholder="endHr">
+                    <label for="D">endHr</label>
+                  </div></div>
+                  <div class="col-2"><div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="E" placeholder="endMin">
+                    <label for="E">endMin</label>
+                  </div></div>
+                  <div class="col-2"><div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="F" placeholder="endSec">
+                    <label for="F">endSec</label>
+                  </div></div>
+            </div> 
+              
+            <button type="button" onClick="submitdetails()" class="btn btn-primary btn-lg">SubmitDetails</button>
+           </div>
+
+           <!-- ********************************************************************************* -->
+           <div id="qus" style="display: none;">
+                  <div class="table">
+                          <div class="row">
+                                <div class="col">
+                                  <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="qus1" placeholder="question">
+                                    <label for="qus1">Question</label>
+                                  </div>
+                                </div>
+                          </div>
+                          <div class="row">
+                                <div class="col-6"> <div class="form-floating mb-3">
+                                  <input type="text" class="form-control" id="oA" placeholder="optA">
+                                  <label for="oA">OptionA</label>
+                                </div></div>
+                                <div class="col-6"> <div class="form-floating mb-3">
+                                  <input type="text" class="form-control" id="oB" placeholder="optB">
+                                  <label for="oB">OptionB</label>
+                                </div></div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6"> <div class="form-floating mb-3">
+                              <input type="text" class="form-control" id="oC" placeholder="optC">
+                              <label for="oC">OptionC</label>
+                            </div></div>
+                            <div class="col-6"> <div class="form-floating mb-3">
+                              <input type="text" class="form-control" id="oD" placeholder="optD">
+                              <label for="oD">OptionD</label>
+                            </div></div>
+                        </div>r
+                        <div classs="row">
+                          <div class="col-6">
+                            <div class="form-floating mb-3">
+                              <input type="number" class="form-control" id="cO" placeholder="correctOpt">
+                              <label for="cO">correctOption</label>
+                            </div>
+                          </div>
+                        </div>r
+                        </div>t
+                        <button type="button" onClick="addQuestion()" class="btn btn-primary btn-lg">AddNextQuestion</button>
+                        <button type="button" onClick="submit()" class="btn btn-primary btn-lg">FinishQuiz</button>
+                </div>
+                 
+                <div id="complete" style="display: none;">
+                  <div id="messege"></div>
+                  <button type="button" onClick="menu_bar1()" class="btn btn-primary btn-lg">main_menu</button>
+
+                </div>
+                <!-- ********************************************************************* -->
+               
+               
+          </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  </body>
+</html>
